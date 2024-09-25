@@ -1,1 +1,5 @@
 apt install -y nginx
+nginx -v
+curl localhost
+netstat -tulpn | grep nginx
+systemctl status nginx
