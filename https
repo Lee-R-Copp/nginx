@@ -4,16 +4,17 @@
 # Create a strong Diffie-Hellman group for enhanced security
 # openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
-# Create a configuration snippet
+# Create a certificate snippet
 # nano -w /etc/nginx/snippets/self-signed.conf
 
 ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
-# Create another snippet with SSL settings
+# Create a SSL snippet
 # nano /etc/nginx/snippets/ssl-params.conf
 
 # SSL Basics
+ssl_dhparam /etc/ssl/certs/dhparam.pem;
 ssl_protocols TLSv1.2 TLSv1.3;
 ssl_prefer_server_ciphers on;
 
@@ -25,11 +26,11 @@ ssl_session_cache shared:SSL:10m;
 ssl_session_timeout 10m;
 ssl_buffer_size 4k;
 
+# Create a SSL header snippet
+# nano /etc/nginx/snippets/ssl-headers.conf
+
 # HSTS (HTTP Strict Transport Security)
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-
-# Diffie-Hellman Paramter
-ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
 # Security headers:
 add_header X-Frame-Options DENY;
