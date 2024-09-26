@@ -1,4 +1,5 @@
 apt install -y nginx
+apt install -y apache2-utils
 nginx -v
 curl localhost
 netstat -tulpn | grep nginx
